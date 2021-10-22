@@ -1,0 +1,62 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <div class="register-header">
+        <h2>Welcome to Mail! Log in</h2>
+    </div>
+
+    <div class="register-page-grid">
+
+        <div class="background-div">
+            <img src="{% static 'mail/maildelivery.png' %}" alt="">
+        </div>
+
+         <div class="register-div">
+            <div class="form-div">
+                {% if message %}
+            <div class="login-error bg-danger">
+                <p class="close-x">X</p>
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+    
+        <form class="register-form" action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control form-sign" id="email" type="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control form-sign" id="password" type="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirm">Confirm password</label>
+                <input class="form-control form-sign" id="confirm" type="password" name="confirmation">
+            </div>
+            <div class="register-btn">
+                <input class="btn btn-primary" type="submit" value="Register">
+            </div>
+            Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+        </form>
+            </div>
+         </div>
+
+    </div>
+
+    <div class="register-footer">
+        <small>Copyright&copy;Idumeka Oritogun. All right reserved</small>
+        <small>Atrribution: Images and logo by <a href="https://pngtree.com/">PNG Tree</a></small>
+        <small><a href='https://pngtree.com/so/Read'>Image used for login and register page</a></small>
+        <small><a href='https://pngtree.com/so/E-mail'>Image used as logo</a></small>
+    </div>
+
+    <script>
+        document.querySelector('.close-x').addEventListener('click', function () {
+            document.querySelector('.login-error').style.display = 'none';
+        })
+  </script>
+
+{% endblock %}

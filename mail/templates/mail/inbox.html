@@ -1,0 +1,177 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block nav %}
+   <!-- The top navigation bar -->
+<nav class="navbar-light">
+  <div class="navigation-div">
+    <button class="navbar-toggler bg-light  navi-btn" type="button" data-target="#navbarCollapse"
+    data-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse collapse-div" id="navbarCollapse">
+      <ul>
+        <li class="nav-item">
+          <a class="inbox active navigation-link nav-link text-light" href="index.html">
+            <span class="las la-inbox"></span><span class="sr-only">(current)</span>
+            <span>Inbox</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="sent nav-link  navigation-link text-light" href="about.html">
+            <span class="las la-paper-plane"></span>
+            <span>Sent</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="compose nav-link  navigation-link text-light" href="project.html">
+            <span class="las la-edit"></span>
+            <span>Compose</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="archived nav-link  navigation-link text-light" href="myCv.html">
+            <span class="las la-archive"></span>
+            <span>Archived</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'logout' %}" class="nav-link text-light" href="myCv.html">
+            <span class="las la-sign-out-alt"></span>
+            <span>Log Out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endblock %}
+
+{% block body %}
+
+<!-- The div that contains the sidebar and main body -->
+<div class="page-body">
+  <div class="row">
+    
+    <!-- Sidebar navigation -->
+    <div class="col-xl-2 col-lg-1 col-sm-1 sidebar">
+      <div class="sidebar-brand">
+        <h4><span><img class="logo" src="{% static 'mail/mail.png' %}"></span><span>Mail</span></h4>
+      </div>
+
+      <div class="sidebar-menu">
+        <ul>
+          <li>
+            <a class="inbox active navigation-link"><span class="las la-inbox"></span><span>Inbox</span></a>
+          </li>
+          <li>
+            <a class="sent navigation-link"><span class="las la-paper-plane"></span><span>Sent</span></a>
+          </li>
+          <li>
+            <a class="compose navigation-link"><span class="las la-edit"></span><span>Compose</span></a>
+          </li>
+          <li>
+            <a class="archived navigation-link"><span class="las la-archive"></span><span>Archived</span></a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}"><span class="las la-sign-out-alt"></span><span>Log out</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+       <!-- Main body -->
+
+    <main class="col-xl=10 col-lg-11 col-sm-11 col-12 nopadding">  
+      <div id="emails-view">
+        <div class="email-welcome">
+          <img src="{% static 'mail/mailpic.png' %}" width="120px" height="90px">
+          <div>
+            <h4>Hello, {{request.user.email}}</h4>
+            <p>Welcome to Mail! Send, Receive and Archive e-mails.</p>
+          </div>
+        </div>
+        <div id="emails-view-head">
+          <div class="emails-number ml-3 mr-3 forinbox">
+            <div><h2><span class="las la-inbox"></span></h2></div>
+            <div>
+              <h3 class="number1"></h3>
+              <p>Mails Recieved</p>
+            </div>
+          </div>
+          <div class="emails-number mr-3 forsent">
+            <div><h2><span class="las la-paper-plane"></span></h2></div>
+            <div>
+              <h3 class="number2"></h3>
+              <p>Mails Sent</p>
+            </div>
+          </div>
+          <div class="emails-number mr-3 forarchived">
+            <div><h2><span class="las la-archive"></span></h2></div>
+            <div>
+              <h3 class="number3"></h3>
+              <p>Mails Archived</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="emails-view-body">
+          <div id="emails-view-body-head"></div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Sender</th>
+                  <th>Subject</th>
+                  <th>Date</th>
+                </tr>   
+              </thead>
+              <tbody class="tbody"></tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- The compose view -->
+  
+      <div id="compose-view">
+        <div id="error-div" class="bg-danger">
+          <p class="error"></p>
+        </div>
+        <div id="message-div" class="bg-success">
+          <p class="message"></p>
+        </div>
+        <form id="compose-form">
+          <div class="form-group">
+            From: <input disabled class="form-control" value="{{ request.user.email }}">
+          </div>
+          <div class="form-group">
+            To: <input id="compose-recipients" class="form-control">
+          </div>
+          <div class="form-group">
+            <input class="form-control" id="compose-subject" placeholder="Subject">
+          </div>
+          <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+          <div class="submit-btn">
+            <input type="submit" class="btn btn-primary"/>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Read view for reading an email -->
+      <div id="read-view">
+
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}
