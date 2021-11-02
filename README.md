@@ -32,6 +32,8 @@ Design a front-end for an email client that makes API calls to send and receive 
 - Semantic HTML5 markup
 - CSS
 - Bootstrap
+- Javascript
+- Fetch Api
 - Python
 - Django
 
